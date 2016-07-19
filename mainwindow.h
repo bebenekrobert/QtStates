@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QStateMachine>
 
 namespace Ui {
 class MainWindow;
@@ -20,6 +21,10 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    QStateMachine machine;
+    QState *s1;
+    QState *s2;
+    QState *s3;
 };
 
 #endif // MAINWINDOW_H
