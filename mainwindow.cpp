@@ -28,6 +28,10 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+
+    delete s1;
+    delete s2;
+    delete s3;
 }
 
 void MainWindow::on_pushButton_clicked()
