@@ -46,6 +46,7 @@ MainWindow::~MainWindow()
     delete s1;
     delete s2;
     delete s3;
+    delete s4;
 }
 
 void MainWindow::on_pushButton_clicked()
