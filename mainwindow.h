@@ -18,6 +18,12 @@ public:
 
 private slots:
     void on_pushButton_clicked();
+    void powerOn1stLbl();
+    void powerOn2ndLbl();
+    void powerOn3rdLbl();
+    void powerOff1stLbl();
+    void powerOff2ndLbl();
+    void powerOff3rdLbl();
 
 private:
     Ui::MainWindow *ui;

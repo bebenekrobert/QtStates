@@ -23,6 +23,13 @@ MainWindow::MainWindow(QWidget *parent) :
     s1->assignProperty(ui->label, "text", "In st s1");
     s2->assignProperty(ui->label, "text", "In st s2");
     s3->assignProperty(ui->label, "text", "In st s3");
+
+    QObject::connect(s1, SIGNAL(entered()), this, SLOT(powerOn1stLbl()));
+    QObject::connect(s1, SIGNAL(exited()), this, SLOT(powerOff1stLbl()));
+    QObject::connect(s2, SIGNAL(entered()), this, SLOT(powerOn2ndLbl()));
+    QObject::connect(s2, SIGNAL(exited()), this, SLOT(powerOff2ndLbl()));
+    QObject::connect(s3, SIGNAL(entered()), this, SLOT(powerOn3rdLbl()));
+    QObject::connect(s3, SIGNAL(exited()), this, SLOT(powerOff3rdLbl()));
 }
 
 MainWindow::~MainWindow()
@@ -38,4 +45,34 @@ void MainWindow::on_pushButton_clicked()
 {
     //ui->label->setText("clicked");
     qDebug() << "clicked";
+}
+
+void MainWindow::powerOn1stLbl()
+{
+    ui->label_1->setText("1stLbl ON");
+}
+
+void MainWindow::powerOn2ndLbl()
+{
+    ui->label_2->setText("2ndLbl ON");
+}
+
+void MainWindow::powerOn3rdLbl()
+{
+    ui->label_3->setText("3rdLbl ON");
+}
+
+void MainWindow::powerOff1stLbl()
+{
+    ui->label_1->setText("1stLbl Off");
+}
+
+void MainWindow::powerOff2ndLbl()
+{
+    ui->label_2->setText("2ndLbl Off");
+}
+
+void MainWindow::powerOff3rdLbl()
+{
+    ui->label_3->setText("3rdLbl Off");
 }
