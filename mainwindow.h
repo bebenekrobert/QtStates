@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QStateMachine>
+#include <QFinalState>
 
 namespace Ui {
 class MainWindow;
@@ -31,6 +32,7 @@ private:
     QState *s1;
     QState *s2;
     QState *s3;
+    QFinalState *s4;
 };
 
 #endif // MAINWINDOW_H

@@ -17,6 +17,8 @@ MainWindow::MainWindow(QWidget *parent) :
     machine.addState(s1);
     machine.addState(s2);
     machine.addState(s3);
+    s4 = new QFinalState();
+    machine.addState(s4);
     machine.setInitialState(s1);
     machine.start();
 
@@ -30,6 +32,11 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(s2, SIGNAL(exited()), this, SLOT(powerOff2ndLbl()));
     QObject::connect(s3, SIGNAL(entered()), this, SLOT(powerOn3rdLbl()));
     QObject::connect(s3, SIGNAL(exited()), this, SLOT(powerOff3rdLbl()));
+
+    s1->addTransition(ui->quitButton, SIGNAL(clicked()), s4);
+    s2->addTransition(ui->quitButton, SIGNAL(clicked()), s4);
+    s3->addTransition(ui->quitButton, SIGNAL(clicked()), s4);
+    QObject::connect(&machine, SIGNAL(finished()), QApplication::instance(), SLOT(quit()));
 }
 
 MainWindow::~MainWindow()
