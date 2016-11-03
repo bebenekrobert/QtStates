@@ -30,9 +30,10 @@ private:
     Ui::MainWindow *ui;
     QStateMachine machine;
     QState *s1;
-    QState *s2;
-    QState *s3;
-    QFinalState *s4;
+    QState *s11;
+    QState *s12;
+    QState *s13;
+    QFinalState *s2;
 };
 
 #endif // MAINWINDOW_H

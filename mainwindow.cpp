@@ -9,33 +9,31 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     s1 = new QState();
-    s2 = new QState();
-    s3 = new QState();
-    s1->addTransition(ui->pushButton, SIGNAL(clicked()), s2);
-    s2->addTransition(ui->pushButton, SIGNAL(clicked()), s3);
-    s3->addTransition(ui->pushButton, SIGNAL(clicked()), s1);
+    s11 = new QState(s1);
+    s12 = new QState(s1);
+    s13 = new QState(s1);
+    s11->addTransition(ui->pushButton, SIGNAL(clicked()), s12);
+    s12->addTransition(ui->pushButton, SIGNAL(clicked()), s13);
+    s13->addTransition(ui->pushButton, SIGNAL(clicked()), s11);
     machine.addState(s1);
+    s2 = new QFinalState();
     machine.addState(s2);
-    machine.addState(s3);
-    s4 = new QFinalState();
-    machine.addState(s4);
     machine.setInitialState(s1);
+    s1->setInitialState(s11);
     machine.start();
 
-    s1->assignProperty(ui->label, "text", "In st s1");
-    s2->assignProperty(ui->label, "text", "In st s2");
-    s3->assignProperty(ui->label, "text", "In st s3");
+    s11->assignProperty(ui->label, "text", "In st s11");
+    s12->assignProperty(ui->label, "text", "In st s12");
+    s13->assignProperty(ui->label, "text", "In st s13");
 
-    QObject::connect(s1, SIGNAL(entered()), this, SLOT(powerOn1stLbl()));
-    QObject::connect(s1, SIGNAL(exited()), this, SLOT(powerOff1stLbl()));
-    QObject::connect(s2, SIGNAL(entered()), this, SLOT(powerOn2ndLbl()));
-    QObject::connect(s2, SIGNAL(exited()), this, SLOT(powerOff2ndLbl()));
-    QObject::connect(s3, SIGNAL(entered()), this, SLOT(powerOn3rdLbl()));
-    QObject::connect(s3, SIGNAL(exited()), this, SLOT(powerOff3rdLbl()));
+    QObject::connect(s11, SIGNAL(entered()), this, SLOT(powerOn1stLbl()));
+    QObject::connect(s11, SIGNAL(exited()), this, SLOT(powerOff1stLbl()));
+    QObject::connect(s12, SIGNAL(entered()), this, SLOT(powerOn2ndLbl()));
+    QObject::connect(s12, SIGNAL(exited()), this, SLOT(powerOff2ndLbl()));
+    QObject::connect(s13, SIGNAL(entered()), this, SLOT(powerOn3rdLbl()));
+    QObject::connect(s13, SIGNAL(exited()), this, SLOT(powerOff3rdLbl()));
 
-    s1->addTransition(ui->quitButton, SIGNAL(clicked()), s4);
-    s2->addTransition(ui->quitButton, SIGNAL(clicked()), s4);
-    s3->addTransition(ui->quitButton, SIGNAL(clicked()), s4);
+    s1->addTransition(ui->quitButton, SIGNAL(clicked()), s2);
     QObject::connect(&machine, SIGNAL(finished()), QApplication::instance(), SLOT(quit()));
 }
 
@@ -44,9 +42,10 @@ MainWindow::~MainWindow()
     delete ui;
 
     delete s1;
+    delete s11;
+    delete s12;
+    delete s13;
     delete s2;
-    delete s3;
-    delete s4;
 }
 
 void MainWindow::on_pushButton_clicked()
