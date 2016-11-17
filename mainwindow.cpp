@@ -42,9 +42,6 @@ MainWindow::~MainWindow()
     delete ui;
 
     delete s1;
-    delete s11;
-    delete s12;
-    delete s13;
     delete s2;
 }
 
